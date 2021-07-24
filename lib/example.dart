@@ -6,15 +6,19 @@ import 'package:flutter/foundation.dart';
 void exampleMain() {
   print("Start exampleMain");
 
-  // numberFuture().then((value) => {
-  //   print("value: $value")
-  // }).catchError((error){
-  //   print("error: $error");
+  // login().then((value) => {
+  //   print("login $value}")
+  // }).catchError((error) {
+  //   print("error $error");
   // });
+  //
+  PrintHelloWorld()
+      .makeHelloWorld()
+      .then((value) => {
+        print(value)
+      });
 
-  login().then((value) => {
-    print("login $value}")
-  });
+  print("End exampleMain");
 }
 
 /// convention
@@ -53,3 +57,27 @@ class LoginManager {
     });
   }
 }
+
+class PrintHelloWorld {
+  Future<String> requestHello() {
+    print("start hello");
+    return Future.delayed(Duration(seconds: 3), () {
+      return "Hello";
+    });
+  }
+
+  Future<String> requestWorld() {
+    print("start world");
+    return Future.delayed(Duration(seconds: 3), () {
+      return "World";
+    });
+  }
+
+  Future<String> makeHelloWorld() async {
+    var v1 = requestHello();
+    var v2 = requestWorld();
+    return "${await v1} ${await v2}";
+  }
+}
+
+
