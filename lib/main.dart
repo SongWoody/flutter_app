@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'dart:async';
+import 'example.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  exampleMain();
+
+  // runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
