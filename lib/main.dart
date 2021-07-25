@@ -19,43 +19,40 @@ class RandomWords extends StatefulWidget {
   RandomWordsState createState() => RandomWordsState();
 }
 
+class MenuData {
+  IconData iconData;
+  String title;
+  MenuData(this.iconData, this.title);
+}
+
 class RandomWordsState extends State<RandomWords> {
-  final _biggerFont = const TextStyle(fontSize: 18.0);
+  List<MenuData> items = [
+    MenuData(Icons.camera, "camera"),
+    MenuData(Icons.map, "map"),
+    MenuData(Icons.access_alarm, "alarm"),
+    MenuData(Icons.add_ic_call, "navigate_next")
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Startup Name Gennerator'),
+        title: Text("Woody Example"),
       ),
       body: _buildSuggestions(),
     );
   }
 
   Widget _buildSuggestions() {
-    return ListView(
-      children: [
-        ListTile(
-          leading: Icon(Icons.camera),
-          title: Text("camera"),
+    return ListView.builder(
+      itemCount: items.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          leading: Icon(items[index].iconData),
+          title: Text(items[index].title),
           trailing: Icon(Icons.navigate_next),
-        ),
-        ListTile(
-          leading: Icon(Icons.map),
-          title: Text("map"),
-          trailing: Icon(Icons.navigate_next),
-        ),
-        ListTile(
-          leading: Icon(Icons.access_alarm),
-          title: Text("alarm"),
-          trailing: Icon(Icons.navigate_next),
-        ),
-        ListTile(
-          leading: Icon(Icons.add_ic_call),
-          title: Text("add call"),
-          trailing: Icon(Icons.navigate_next),
-        )
-      ],
+        );
+      },
     );
   }
 }
