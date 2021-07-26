@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/testPage1.dart';
 import 'example.dart';
 
 void main() {
@@ -14,20 +15,23 @@ class MyApp extends StatelessWidget {
   }
 }
 
+class MenuData {
+  IconData? iconData;
+  String title;
+  Function(BuildContext a)? onClick;
+  MenuData(this.iconData, this.title, {this.onClick});
+}
+
 class RandomWords extends StatefulWidget {
   @override
   RandomWordsState createState() => RandomWordsState();
 }
 
-class MenuData {
-  IconData iconData;
-  String title;
-  MenuData(this.iconData, this.title);
-}
-
 class RandomWordsState extends State<RandomWords> {
   List<MenuData> items = [
-    MenuData(Icons.camera, "camera"),
+    MenuData(Icons.contact_page, "TestPage1", onClick: (ctx) => {
+      Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => TestPage1()))
+    }),
     MenuData(Icons.map, "map"),
     MenuData(Icons.access_alarm, "alarm"),
     MenuData(Icons.add_ic_call, "navigate_next")
@@ -47,11 +51,20 @@ class RandomWordsState extends State<RandomWords> {
     return ListView.builder(
       itemCount: items.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          leading: Icon(items[index].iconData),
-          title: Text(items[index].title),
-          trailing: Icon(Icons.navigate_next),
-        );
+        return _buildType(items[index]);
+      },
+    );
+  }
+
+  Widget _buildType(MenuData item) {
+    return GestureDetector(
+      child: ListTile(
+        leading: Icon(item.iconData),
+        title: Text(item.title),
+        trailing: Icon(Icons.navigate_next),
+      ),
+      onTap: () {
+        item.onClick?.call(context);
       },
     );
   }
