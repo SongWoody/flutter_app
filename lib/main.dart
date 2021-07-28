@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/testPage1.dart';
+import 'package:flutter_app/testPage2.dart';
 import 'example.dart';
 
 void main() {
@@ -32,7 +33,9 @@ class RandomWordsState extends State<RandomWords> {
     MenuData(Icons.contact_page, "TestPage1", onClick: (ctx) => {
       Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => TestPage1()))
     }),
-    MenuData(Icons.map, "map"),
+    MenuData(Icons.map, "TestPage2(Animation)", onClick: (ctx) => {
+      Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => TestPage2()))
+    }),
     MenuData(Icons.access_alarm, "alarm"),
     MenuData(Icons.add_ic_call, "navigate_next")
   ];
