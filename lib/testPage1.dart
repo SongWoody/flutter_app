@@ -17,7 +17,8 @@ class TestPage1 extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text("hi", style: TextStyle(fontSize: 30),),
-            MyCheckBox()
+            MyCheckBox(),
+            GenderRadioGroup()
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -61,6 +62,47 @@ class _MyCheckBoxState extends State<MyCheckBox> {
         _isCheck = value!;
       });
     });
+  }
+}
+
+class GenderRadioGroup extends StatefulWidget {
+  const GenderRadioGroup({Key? key}) : super(key: key);
+
+  @override
+  _GenderRadioGroupState createState() => _GenderRadioGroupState();
+}
+
+enum Gender {MAN, WOMEN}
+class _GenderRadioGroupState extends State<GenderRadioGroup> {
+  Gender _gender = Gender.MAN;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        RadioListTile(
+          title: Text("남자"),
+          value: Gender.MAN,
+          groupValue: _gender,
+          onChanged: (value){
+            setState(() {
+              _gender = value as Gender;
+            });
+          },
+        ),
+        RadioListTile(
+          title: Text("여자"),
+          value: Gender.WOMEN,
+          groupValue: _gender,
+          onChanged: (value){
+            setState(() {
+              _gender = value as Gender;
+            });
+          },
+        )
+
+      ],
+    );
   }
 }
 
