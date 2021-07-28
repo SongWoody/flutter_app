@@ -16,7 +16,8 @@ class TestPage1 extends StatelessWidget {
               controller: _nameController,
             ),
             SizedBox(height: 20),
-            Text("hi", style: TextStyle(fontSize: 30),)
+            Text("hi", style: TextStyle(fontSize: 30),),
+            MyCheckBox()
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -42,3 +43,24 @@ class TestPage1 extends StatelessWidget {
     );
   }
 }
+
+class MyCheckBox extends StatefulWidget {
+  const MyCheckBox({Key? key}) : super(key: key);
+
+  @override
+  _MyCheckBoxState createState() => _MyCheckBoxState();
+}
+
+class _MyCheckBoxState extends State<MyCheckBox> {
+  bool _isCheck = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(value: _isCheck, onChanged: (value) {
+      setState(() {
+        _isCheck = value!;
+      });
+    });
+  }
+}
+
