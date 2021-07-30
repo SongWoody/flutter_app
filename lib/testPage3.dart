@@ -13,15 +13,20 @@ class TestPage3 extends StatelessWidget {
         slivers: <Widget>[
           SliverAppBar(
             pinned: true,
-            expandedHeight: 100.0,
+            expandedHeight: 300.0,
             flexibleSpace: FlexibleSpaceBar(
               title: Text(this.toString()),
               background: Image.asset('imageAssets/comp1_100.png', fit: BoxFit.cover,),
             ),
           ),
           SliverFillRemaining(
-            child: Center(
-              child: Text("HI"),
+            child: Column(
+              children: [
+                Text("Hi"),
+                ElevatedButton(onPressed: () {
+                  Navigator.pop(context);
+                }, child: Text("Pop Button"))
+              ],
             ),
           )
         ],
