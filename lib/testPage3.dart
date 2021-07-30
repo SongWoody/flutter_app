@@ -24,7 +24,7 @@ class TestPage3 extends StatelessWidget {
               children: [
                 Text("Hi"),
                 ElevatedButton(onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.pop(context, "Hi");
                 }, child: Text("Pop Button"))
               ],
             ),

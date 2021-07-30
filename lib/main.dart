@@ -37,8 +37,9 @@ class RandomWordsState extends State<RandomWords> {
     MenuData(Icons.map, "TestPage2(Animation)", onClick: (ctx) => {
       Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => TestPage2()))
     }),
-    MenuData(Icons.access_alarm, "TestPage3", onClick: (ctx) => {
-      Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => TestPage3()))
+    MenuData(Icons.access_alarm, "TestPage3", onClick: (ctx) async {
+      final result = await Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => TestPage3()));
+      print(result);
     }),
     MenuData(Icons.add_ic_call, "navigate_next")
   ];
