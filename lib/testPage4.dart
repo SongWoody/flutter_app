@@ -8,6 +8,7 @@ class TestPage4 extends StatefulWidget {
 }
 
 class _TestPage4State extends State<TestPage4> {
+  var _index = 0;
 
   @override
   void initState() {
@@ -20,61 +21,56 @@ class _TestPage4State extends State<TestPage4> {
     print("Test Page4 build");
     return Material(
       child: Scaffold(
-        appBar: AppBar(title: Text(this.toString()),),
-        body: Center(
-          child: TextButton(
-            child: Text("Next Page"),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (ctx) {
-                return TestPage4_1();
-              }));
-            },
+        appBar: AppBar(
+          title: Text(
+            "UI Example",
+            style: TextStyle(color: Colors.black),
           ),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black),
+        ),
+        body: Center(
+          child: Text("Page ${_index + 1}"),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _index,
+          items: [
+            BottomNavigationBarItem(
+              label: "홈",
+              icon: Icon(Icons.home_rounded)
+            ),
+            BottomNavigationBarItem(
+              label: "이용서비스",
+              icon: Icon(Icons.article_sharp)
+            ),
+            BottomNavigationBarItem(
+              label: "내 정보",
+              icon: Icon(Icons.account_circle_rounded)
+            )
+          ],
+          onTap: (index) {
+            setState(() {
+              print("$index ???");
+              _index = index;
+            });
+          },
         ),
       ),
     );
   }
 }
 
-class TestPage4_1 extends StatefulWidget {
-  const TestPage4_1({Key? key}) : super(key: key);
+class TabContainer extends StatefulWidget {
+  const TabContainer({Key? key}) : super(key: key);
 
   @override
-  _TestPage4_1State createState() => _TestPage4_1State();
+  _TabContainerState createState() => _TabContainerState();
 }
 
-class _TestPage4_1State extends State<TestPage4_1> {
-
-  @override
-  void initState() {
-    super.initState();
-    print("Test Page4_1 Init State");
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    print("Test Page4_1 dispose");
-  }
-
+class _TabContainerState extends State<TabContainer> {
   @override
   Widget build(BuildContext context) {
-    print("Test Page4_1 build");
-    return Material(
-      child: Scaffold(
-        appBar: AppBar(title: Text(this.toString()),),
-        body: Center(
-          child: TextButton(
-            child: Text("Next Page"),
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (ctx) {
-                return TestPage4_1();
-              }));
-            },
-          ),
-        ),
-      ),
-    );
+    return Container();
   }
 }
-
