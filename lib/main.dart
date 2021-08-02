@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/testPage1.dart';
 import 'package:flutter_app/testPage2.dart';
 import 'package:flutter_app/testPage3.dart';
+import 'package:flutter_app/testPage4.dart';
 import 'example.dart';
 
 void main() {
@@ -41,7 +42,9 @@ class RandomWordsState extends State<RandomWords> {
       final result = await Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => TestPage3()));
       print(result);
     }),
-    MenuData(Icons.add_ic_call, "navigate_next")
+    MenuData(Icons.add_ic_call, "navigate_next", onClick: (ctx) => {
+      Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => TestPage4()))
+    })
   ];
 
   @override
