@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/page4/child/firstPage.dart';
+import 'package:flutter_app/page4/child/secondPage.dart';
+import 'package:flutter_app/page4/child/thirdPage.dart';
 
 class TestPage4 extends StatefulWidget {
   const TestPage4({Key? key}) : super(key: key);
@@ -9,6 +12,11 @@ class TestPage4 extends StatefulWidget {
 
 class _TestPage4State extends State<TestPage4> {
   var _index = 0;
+  var pageList = [
+    FirstPage(),
+    SecondPage(),
+    ThirdPage(),
+  ];
 
   @override
   void initState() {
@@ -28,25 +36,28 @@ class _TestPage4State extends State<TestPage4> {
           ),
           centerTitle: true,
           backgroundColor: Colors.white,
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.add)),
+          ],
           iconTheme: IconThemeData(color: Colors.black),
         ),
         body: Center(
-          child: Text("Page ${_index + 1}"),
+          child: pageList[_index],
         ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _index,
-          items: [
+          items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               label: "홈",
-              icon: Icon(Icons.home_rounded)
+              icon: Icon(Icons.home_rounded),
             ),
             BottomNavigationBarItem(
               label: "이용서비스",
               icon: Icon(Icons.article_sharp)
             ),
             BottomNavigationBarItem(
-              label: "내 정보",
-              icon: Icon(Icons.account_circle_rounded)
+                label: "내 정보",
+                icon: Icon(Icons.account_circle_rounded)
             )
           ],
           onTap: (index) {
