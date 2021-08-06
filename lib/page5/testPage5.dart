@@ -5,23 +5,7 @@ class TestPage5 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-        child: Scaffold(
-          appBar: AppBar(title: Text("TestPage5"),),
-          body: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: TextFormField(),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: TextFormField(),
-              )
-            ],
-          ),
-        )
-    );
+    return Material(child: TestForm());
   }
 }
 
@@ -33,24 +17,55 @@ class TestForm extends StatefulWidget {
 }
 
 class _TestFormState extends State<TestForm> {
-  final myController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+  }
 
-    myController.addListener(_printLatestValue);
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
-  }
-
-  _printLatestValue() {
-    print("${myController.text}");
-
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("TestPage5"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              TextFormField(
+                validator: (text) {
+                  if (text!.isEmpty) {
+                    return "글자를 입력하세요.";
+                  }
+                  return null;
+                },
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    final currentState = _formKey.currentState;
+                    if (currentState != null && currentState.validate()) {
+                      ScaffoldMessenger
+                          .of(context)
+                          .showSnackBar(
+                          SnackBar(content: Text("검증 완료"))
+                      );
+                    }
+                  },
+                  child: Text("Button")
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
-
