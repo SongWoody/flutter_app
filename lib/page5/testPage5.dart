@@ -24,3 +24,33 @@ class TestPage5 extends StatelessWidget {
     );
   }
 }
+
+class TestForm extends StatefulWidget {
+  const TestForm({Key? key}) : super(key: key);
+
+  @override
+  _TestFormState createState() => _TestFormState();
+}
+
+class _TestFormState extends State<TestForm> {
+  final myController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    myController.addListener(_printLatestValue);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+
+  _printLatestValue() {
+    print("${myController.text}");
+
+  }
+}
+
