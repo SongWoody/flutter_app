@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class TestPage6 extends StatelessWidget {
@@ -5,11 +7,7 @@ class TestPage6 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "StopWatch",
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: StopWatchPage(),
-    );
+    return StopWatchPage();
   }
 }
 
@@ -21,6 +19,19 @@ class StopWatchPage extends StatefulWidget {
 }
 
 class _StopWatchPageState extends State<StopWatchPage> {
+  Timer? _timer;
+
+  var _time = 0;
+  var _isRunning = false;
+
+  List<String> _lapTimers = [];
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,16 +45,20 @@ class _StopWatchPageState extends State<StopWatchPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        heroTag: "TestPage6",
         onPressed: () => setState(() {
           _clickButton();
         }),
-        child: Icon(Icons.play_arrow),
+        child: _isRunning ? Icon(Icons.pause) : Icon(Icons.play_arrow),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 
   Widget _buildBody() {
+    var sec = _time ~/ 100;
+    var hundredth = '${_time % 100}'.padLeft(2, '0');
+
     return Center(
       child: Padding(
         padding: const EdgeInsets.only(top: 30),
@@ -56,17 +71,17 @@ class _StopWatchPageState extends State<StopWatchPage> {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Text(
-                      '0',
+                      '$sec',
                       style: TextStyle(fontSize: 50.0),
                     ),
-                    Text("00")
+                    Text("$hundredth")
                   ],
                 ),
                 Container(
                   width: 100,
                   height: 200,
                   child: ListView(
-                    children: [],
+                    children: _buildLapList(),
                   ),
                 )
               ],
@@ -76,7 +91,7 @@ class _StopWatchPageState extends State<StopWatchPage> {
               bottom: 10,
               child: FloatingActionButton(
                 backgroundColor: Colors.deepOrange,
-                onPressed: () {},
+                onPressed: () => _reset(),
                 child: Icon(Icons.rotate_left),
               ),
             ),
@@ -84,7 +99,11 @@ class _StopWatchPageState extends State<StopWatchPage> {
               right: 10,
               bottom: 10,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    _recurLapTime('$sec.$hundredth');
+                  });
+                },
                 child: Text("랩타입"),
               ),
             )
@@ -94,5 +113,44 @@ class _StopWatchPageState extends State<StopWatchPage> {
     );
   }
 
-  void _clickButton() {}
+  void _clickButton() {
+    _isRunning = !_isRunning;
+
+    if (_isRunning) {
+      _start();
+    } else {
+      _pause();
+    }
+  }
+
+  void _start() {
+    _timer = Timer.periodic(Duration(milliseconds: 10), (timer) {
+      setState(() {
+        _time ++;
+      });
+    });
+  }
+
+  void _pause() {
+    _timer?.cancel();
+  }
+
+  void _reset() {
+    setState(() {
+      _isRunning = false;
+      _timer?.cancel();
+      _lapTimers.clear();
+      _time = 0;
+    });
+  }
+
+  void _recurLapTime(String time) {
+    print("_recurLapTime");
+    _lapTimers.insert(0, '${_lapTimers.length + 1}등 $time');
+  }
+
+  List<Widget> _buildLapList() {
+    print("_buildLapList ${_lapTimers.length}");
+    return _lapTimers.map((e) => Text(e)).toList();
+  }
 }
