@@ -1,7 +1,6 @@
-
-
 import 'package:flutter/material.dart';
-import 'dart:convert';
+
+import 'package:flutter_app/network/myUseCase.dart';
 
 /// Json Test Page
 class TestPage8 extends StatelessWidget {
@@ -9,53 +8,49 @@ class TestPage8 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String objText = '{ "name":"woody", "age"'':29 }';
-    User? woody;
-    try {
-      woody = User.fromJson(jsonDecode(objText));
-    } catch(e) {
-      print("catch");
-    }
-    if (woody != null) {
-      print('${woody.name}');
-      print('${woody.age}');
-    }
-
     return Scaffold(
-      appBar: AppBar(title: Text("Json Test Page"),),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Text("name: "),
-              Text("${woody?.name}")
-            ],
-          ),
-          Row(
-            children: [
-              Text("age: "),
-              Text("${woody?.age}")
-            ],
-          ),
-
-        ],
+      appBar: AppBar(
+        title: Text("Json Test Page"),
       ),
+      body: HackerNewsIdList(),
     );
   }
 }
 
-class User {
-  String name;
-  int age;
+class HackerNewsIdList extends StatefulWidget {
+  const HackerNewsIdList({Key? key}) : super(key: key);
 
-  User(this.name, this.age);
+  @override
+  _HackerNewsIdListState createState() => _HackerNewsIdListState();
+}
 
-  factory User.fromJson(dynamic json) {
-    return User(json['name'] as String, json['age'] as int);
+class _HackerNewsIdListState extends State<HackerNewsIdList> {
+  List<int> hackerNesItem = [];
+
+  @override
+  void initState() {
+    MyUseCase().getTopNewsId().then((value) {
+      print("success ${value.toString()}");
+      setState(() {
+        hackerNesItem = value;
+      });
+    }).catchError((error) {
+      print("failure $error");
+    });
+    super.initState();
   }
 
   @override
-  String toString() {
-    return '{ name:${this.name}, age:${this.age} }';
+  Widget build(BuildContext context) {
+    return ListView(
+      children: ListTile.divideTiles(
+          context: context,
+          tiles: hackerNesItem.map((e) => ListTile(
+                leading: Icon(Icons.article_sharp),
+                title: Text("$e"),
+              )
+          )
+      ).toList(),
+    );
   }
 }
