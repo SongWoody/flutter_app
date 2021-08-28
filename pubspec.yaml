@@ -27,6 +27,7 @@ dependencies:
   logger: any
   dio: any
   json_annotation: any
+  rxdart: ^0.27.1
 
 
   # The following adds the Cupertino Icons font to your application.
