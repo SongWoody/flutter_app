@@ -387,6 +387,13 @@
             </list>
           </value>
         </entry>
+        <entry key="rxdart">
+          <value>
+            <list>
+              <option value="C:/Flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.1/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="shelf">
           <value>
             <list>
@@ -569,6 +576,7 @@
       <root url="file://C:/Flutter/.pub-cache/hosted/pub.dartlang.org/quiver-3.0.1/lib" />
       <root url="file://C:/Flutter/.pub-cache/hosted/pub.dartlang.org/retrofit-2.0.1/lib" />
       <root url="file://C:/Flutter/.pub-cache/hosted/pub.dartlang.org/retrofit_generator-2.0.1/lib" />
+      <root url="file://C:/Flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.1/lib" />
       <root url="file://C:/Flutter/.pub-cache/hosted/pub.dartlang.org/shelf-1.2.0/lib" />
       <root url="file://C:/Flutter/.pub-cache/hosted/pub.dartlang.org/shelf_web_socket-1.0.1/lib" />
       <root url="file://C:/Flutter/.pub-cache/hosted/pub.dartlang.org/source_gen-1.0.3/lib" />

@@ -3,6 +3,7 @@ import 'package:flutter_app/page5/testPage5.dart';
 import 'package:flutter_app/page6/testPage6.dart';
 import 'package:flutter_app/page7/testPage7.dart';
 import 'package:flutter_app/page8/testPage8.dart';
+import 'package:flutter_app/rx/examplePage1.dart';
 import 'package:flutter_app/testPage1.dart';
 import 'package:flutter_app/testPage2.dart';
 import 'package:flutter_app/testPage3.dart';
@@ -60,8 +61,10 @@ class RandomWordsState extends State<RandomWords> {
     }),
     MenuData(Icons.add_ic_call, "TestPage8", onClick: (ctx) => {
       Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => TestPage8()))
+    }),
+    MenuData(Icons.add_ic_call, "RxDart Example", onClick: (ctx) => {
+      Navigator.push(ctx, MaterialPageRoute(builder: (ctx) => ExamplePage1()))
     })
-
   ];
 
   @override
